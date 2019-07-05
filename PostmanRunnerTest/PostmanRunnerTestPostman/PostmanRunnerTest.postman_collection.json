@@ -1,0 +1,551 @@
+{
+	"info": {
+		"_postman_id": "935d7045-7f50-4a30-ab0a-502fca7b1b29",
+		"name": "PostmanRunnerTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tests",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a058662b-45a9-4e6a-82d0-61082c5a9060",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"TestId\", data.testId)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Name\":\"Name\",\r\n   \"Description\": \"Description\"\r\n} "
+						},
+						"url": {
+							"raw": "{{Url}}/api/Tests",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "742d57c8-a75a-4ace-a451-956b314801e0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/api/Tests",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67ea82a4-6979-4ba1-a62c-cee6451e9031",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"TestId\":\"{{TestId}}\",\r\n   \"Name\":\"Names\",\r\n   \"Description\": \"Description\"\r\n} "
+						},
+						"url": {
+							"raw": "{{Url}}/api/Tests",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67a1f8cc-77d3-4aa4-8016-1bbcb381d1f8",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/api/Tests/{{TestId}}",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests",
+								"{{TestId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Runner",
+			"item": [
+				{
+					"name": "Post Non Existing Record",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67ea82a4-6979-4ba1-a62c-cee6451e9031",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"TestId\":\"{{TestId}}\",\r\n   \"Name\":\"Names\",\r\n   \"Description\": \"Description\"\r\n} "
+						},
+						"url": {
+							"raw": "{{Url}}/api/Tests",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Non Existing Record",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67a1f8cc-77d3-4aa4-8016-1bbcb381d1f8",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/api/Tests/{{TestId}}",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests",
+								"{{TestId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Non Existing Record",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "742d57c8-a75a-4ace-a451-956b314801e0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var data = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Tests array is empty\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(data.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/api/Tests",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a058662b-45a9-4e6a-82d0-61082c5a9060",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"TestId\", data.testId)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Name\":\"Name\",\r\n   \"Description\": \"Description\"\r\n} "
+						},
+						"url": {
+							"raw": "{{Url}}/api/Tests",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "742d57c8-a75a-4ace-a451-956b314801e0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var data = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Tests array is empty\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(data.length).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/api/Tests",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67ea82a4-6979-4ba1-a62c-cee6451e9031",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"TestId\":\"{{TestId}}\",\r\n   \"Name\":\"Names\",\r\n   \"Description\": \"Description\"\r\n} "
+						},
+						"url": {
+							"raw": "{{Url}}/api/Tests",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "67a1f8cc-77d3-4aa4-8016-1bbcb381d1f8",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/api/Tests/{{TestId}}",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests",
+								"{{TestId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read All Existing Record",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "742d57c8-a75a-4ace-a451-956b314801e0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var data = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Tests array is empty\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(data.length).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/api/Tests",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"api",
+								"Tests"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
