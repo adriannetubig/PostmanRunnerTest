@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PostmanRunnerTestWeb.Entities;
@@ -19,24 +18,93 @@ namespace PostmanRunnerTestWeb.Controllers
                    .UseInMemoryDatabase(databaseName: "InMemoryDb")
                    .Options;
         }
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+
+        [HttpPut]
+        public IActionResult Create([FromBody]ETest eTest)
         {
-            using (var context = new Context(_dbContextOptions))
+            try
             {
-                context.ETests.Add(
-                    new ETest
+                using (var context = new Context(_dbContextOptions))
+                {
+                    context.ETests.Add(eTest);
+                    context.SaveChanges();
+
+                    return new ObjectResult(eTest)
                     {
-                        Description = "description",
-                        Name = "name"
-                    });
-
-                context.SaveChanges();
-
-                var test = context.ETests.FirstOrDefault();
+                        StatusCode = (int)HttpStatusCode.Created
+                    };
+                }
             }
-            return new string[] { "value1", "value2" };
+            catch (Exception e)
+            {
+                return new ObjectResult(e)
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Read()
+        {
+            try
+            {
+                using (var context = new Context(_dbContextOptions))
+                    return Ok(context.ETests.ToList());
+            }
+            catch (Exception e)
+            {
+                return new ObjectResult(e)
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Update([FromBody]ETest eTest)
+        {
+            try
+            {
+                using (var context = new Context(_dbContextOptions))
+                {
+                    context.ETests.Update(eTest);
+                    context.SaveChanges();
+                    return Ok(eTest);
+                }
+            }
+            catch (Exception e)
+            {
+
+                return new ObjectResult(e)
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
+            }
+        }
+
+        [HttpDelete("{TestId}")]
+        public IActionResult Delete(int testId)
+        {
+            try
+            {
+                using (var context = new Context(_dbContextOptions))
+                {
+                    var eTest = context.ETests.FirstOrDefault(a => a.TestId == testId);
+                    context.Remove(eTest);
+                    context.SaveChanges();
+
+                    return NoContent();
+                }
+            }
+            catch (Exception e)
+            {
+
+                return new ObjectResult(e)
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
+            }
         }
     }
 }
