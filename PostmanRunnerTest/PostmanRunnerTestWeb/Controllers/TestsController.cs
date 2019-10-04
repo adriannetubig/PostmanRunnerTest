@@ -27,6 +27,7 @@ namespace PostmanRunnerTestWeb.Controllers
                 using (var context = new Context(_dbContextOptions))
                 {
                     context.ETests.Add(eTest);
+                    context.ETests.Add(eTest);
                     context.SaveChanges();
 
                     return new ObjectResult(eTest)
