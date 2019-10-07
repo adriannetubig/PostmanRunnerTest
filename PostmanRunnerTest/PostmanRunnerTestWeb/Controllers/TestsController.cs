@@ -26,7 +26,7 @@ namespace PostmanRunnerTestWeb.Controllers
             {
                 using (var context = new Context(_dbContextOptions))
                 {
-                    eTest.Description = "Modified Description";
+                    eTest.Description = "Modified Description Refresh";
                     context.ETests.Add(eTest);
                     context.ETests.Add(eTest);
                     context.SaveChanges();
